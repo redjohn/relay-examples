@@ -154,6 +154,13 @@ const shipType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       description: 'The name of the ship.',
+      resolve: (ship) => {
+        if (ship.name === 'X-Wing') {
+          throw new Error('not authorized')
+        } else {
+          return ship.name
+        }
+      }
     },
   }),
   interfaces: [nodeInterface],
